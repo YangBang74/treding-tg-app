@@ -1,15 +1,6 @@
-# tg-winter-game
+# trading telegram app
 
 Vue 3 + TypeScript + TailwindCSS
-
-
-
-- Подключить TailwindCSS
-- Подключить шрифт и общие цвета для проекта
-- Сделать layout и menu внизу
-- Сделать компонент Dialog
-- Сделать компонент Sheart
-- Приступить к главному экрану
 
 Компонентная архитектура
 

@@ -1,46 +1,42 @@
 <script setup lang="ts">
-import { RouterLink, useRoute } from 'vue-router'
+import { RouterLink } from 'vue-router'
 
 import Icons from '@/components/shared/Icons.vue'
 
-const route = useRoute()
-
 const navItems = [
-  { label: 'Главная', icon: 'calendar', name: 'home' },
-  { label: 'Друзья', icon: 'users', name: 'friends' },
-  { label: 'Баланс', icon: 'wallet', name: 'balance' },
-  { label: 'Задачи', icon: 'tasks', name: 'tasks' },
+  { label: 'Earn', icon: 'earn', name: 'home' },
+  { label: 'Wallet', icon: 'wallet', name: 'wallet' },
+  { label: 'Terminal', icon: 'trading-up', name: 'trading-up' },
+  { label: 'Event', icon: 'cup', name: 'cup' },
+  { label: 'Friends', icon: 'users', name: 'users' },
 ]
-
-const isActive = (name: string) => route.name === name
 </script>
 
 <template>
-  <nav
-    class="fixed bottom-0 z-100 left-0 right-0 flex items-end justify-between rounded-t-[1.125rem] bg-[#023A35] px-4 pb-6 pt-2"
+  <footer
+    class="bg-white/5 border-t flex font-medium justify-evenly gap-2 text-xs backdrop-blur-sm border-white/8 z-1000 p-4 rounded-t-[1.25rem]"
   >
-    <template v-for="(item, index) in navItems" :key="item.name">
-      <RouterLink
-        :to="{ name: item.name }"
-        class="flex flex-col items-center justify-end gap-px transition-colors duration-150"
-        :class="[isActive(item.name) ? 'text-[#8CE9FF]' : 'text-white/80']"
-      >
-        <Icons :name="item.icon" />
-        <p class="text-xs">{{ item.label }}</p>
-      </RouterLink>
-      <div v-if="index === 1" class="h-full w-[4.2rem]"></div>
-    </template>
-
     <RouterLink
-      to="/game"
-      class="absolute bottom-5 left-1/2 flex -translate-x-1/2 items-center justify-center rounded-full"
-      style="
-        width: 4.3125rem;
-        height: 4.4375rem;
-        background: linear-gradient(343.06deg, #0095ef 8.29%, #9ff5f7 97.21%);
-      "
+      v-for="item in navItems"
+      :key="item.name"
+      :to="{ name: item.name }"
+      custom
+      v-slot="{ isActive, isExactActive, navigate }"
     >
-      <Icons name="logo" />
+      <button
+        type="button"
+        class="flex flex-col items-center gap-1"
+        :class="(item.name === 'home' ? isExactActive : isActive) ? 'text-white' : 'text-[#B8BBBC]'"
+        @click="navigate"
+      >
+        <Icons
+          :name="item.icon"
+          :size="20"
+          :color="(item.name === 'home' ? isExactActive : isActive) ? '#ffffff' : '#B8BBBC'"
+          :use-gradient="item.name === 'home' ? isExactActive : isActive"
+        />
+        <span>{{ item.label }}</span>
+      </button>
     </RouterLink>
-  </nav>
+  </footer>
 </template>
