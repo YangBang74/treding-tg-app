@@ -16,7 +16,7 @@ import Header from './Header.vue'
     <img
       src="@/assets/images/background.svg"
       alt="background"
-      class="absolute top-0 left-0 w-full h-full object-cover object-top z-1"
+      class="absolute top-0 left-0 w-full object-cover object-top z-1"
     />
   </div>
 </template>
