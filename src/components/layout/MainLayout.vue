@@ -5,20 +5,20 @@ import Header from './Header.vue'
 </script>
 
 <template>
-  <div class="layout relative">
-    <div class="layout__container flex flex-col h-full min-h-screen z-1">
+  <div class="layout">
+    <div class="layout__container relative flex flex-col h-full min-h-screen z-1">
       <Header />
-      <main class="layout__content flex-1 text-transparent z-100">
+      <main class="layout__content flex-1 z-1000">
         <RouterView />
       </main>
       <NavBar />
     </div>
-    <img
-      src="@/assets/images/background.svg"
-      alt="background"
-      class="absolute top-0 left-0 w-full object-cover object-top z-1"
-    />
   </div>
+  <img
+    src="@/assets/images/background.svg"
+    alt="background"
+    class="absolute top-0 left-0 w-full h-full object-cover object-top z-0!"
+  />
 </template>
 <style scoped>
 .layout {
