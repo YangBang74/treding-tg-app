@@ -48,7 +48,7 @@ const changeLocale = (locale: AppLocale) => {
 
       <div
         v-if="isLangOpen"
-        class="absolute right-0 mt-2 w-24 overflow-hidden rounded-xl bg-[#05050C] border border-white/10 shadow-lg py-1 text-sm"
+        class="absolute right-0 mt-2 w-24 overflow-hidden rounded-xl bg-white/5 border border-white/8 shadow-lg py-1 text-sm"
       >
         <button
           v-for="locale in locales"

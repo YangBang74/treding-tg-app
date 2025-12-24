@@ -14,7 +14,7 @@ const navItems = [
 
 <template>
   <footer
-    class="bg-white/5 border-t flex font-medium justify-evenly gap-2 text-xs backdrop-blur-sm border-white/8 z-1000 p-4 rounded-t-[1.25rem]"
+    class="bg-white/5 fixed bottom-0 w-full border-t flex font-medium justify-evenly gap-4 text-xs backdrop-blur-sm border-white/8 z-1000 p-4 rounded-t-[1.25rem]"
   >
     <RouterLink
       v-for="item in navItems"

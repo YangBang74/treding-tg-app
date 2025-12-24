@@ -1,6 +1,113 @@
-<!-- eslint-disable vue/multi-word-component-names -->
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Icons from '@/components/shared/Icons.vue'
+import Info from '@/components/shared/Info.vue'
+</script>
 
 <template>
-  <section class="text-white p-4 space-y-4">HomePage</section>
+  <section class="text-white py-7.5 p-4 space-y-4">
+    <div class="space-y-3.5 text-center">
+      <div class="flex items-center gap-2.5 justify-center">
+        <div class="bg-[#4E80EE] p-2.75 rounded-full">
+          <Icons name="logo" />
+        </div>
+        <h1 class="text-2xl font-semibold inline-block">Dashboard</h1>
+      </div>
+      <span class="text-[#9CA3AF] text-sm"> The Best DeFi Yields In 1-Click </span>
+    </div>
+    <div class="bg-white/4 rounded-[1.875rem] p-4 space-y-3.5">
+      <div class="bg-white/10 rounded-[1.25rem] p-4 py-2.5 flex items-center justify-between">
+        <div>
+          <p class="text-xs text-[#9CA3AF] leading-5 mb-1">Your balance</p>
+          <p class="text-3xl font-semibold text-white leading-7.5 mb-px">$1112.00</p>
+        </div>
+        <button
+          class="bg-[#4E80EE] border border-[#70A3F3] py-2 px-6.5 rounded-full flex items-center gap-2"
+        >
+          <Icons name="database" :size="16" />
+          <span class="font-sm font-medium">Wallet</span>
+        </button>
+      </div>
+      <div class="bg-black/20 rounded-[1.25rem] p-4 py-2.5 flex items-center justify-start gap-3">
+        <div class="bg-[#22C55E]/20 w-10 h-10 flex items-center justify-center p-2.5 rounded-full">
+          <Icons name="dollar" class="text-[#22C55E]" />
+        </div>
+        <div>
+          <div class="flex items-center gap-1.25">
+            <p class="text-xs text-[#9CA3AF] leading-5">Total Lendings</p>
+            <Info text="Total Lendings" />
+          </div>
+          <p class="text-xl font-semibold text-white leading-7.5 mb-px">$586,268,741</p>
+        </div>
+      </div>
+      <div class="bg-black/20 rounded-[1.25rem] p-4 py-2.5 flex items-center justify-start gap-3">
+        <div class="bg-[#F4CE4A]/20 w-10 h-10 flex items-center justify-center p-2.5 rounded-full">
+          <Icons name="users-i" class="text-[#F4CE4A]" :size="16" />
+        </div>
+        <div>
+          <div class="flex items-center gap-1.25">
+            <p class="text-xs text-[#9CA3AF] leading-5">Traders</p>
+            <Info text="Total Lendings" />
+          </div>
+          <p class="text-xl font-semibold text-white leading-7.5 mb-px">155</p>
+        </div>
+      </div>
+    </div>
+    <div class="bg-linear-to-b from-[#43C761]/20 to-[#43C761]/10 rounded-[1.25rem] p-5">
+      <div class="flex items-center justify-between">
+        <div class="flex items-start flex-col justify-between">
+          <p class="text-xl font-semibold text-[#43C761] leading-7.5">Stability</p>
+          <p class="text-sm font-medium">$0.00</p>
+        </div>
+        <div class="flex items-end flex-col justify-between">
+          <div class="flex gap-1 items-center text-s, font-medium text-[#43C761] leading-7.5">
+            <svg
+              width="7"
+              height="6"
+              viewBox="0 0 7 6"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4.60885 0.6C4.11603 -0.2 2.88397 -0.2 2.39115 0.6L0.17345 4.2C-0.31937 5 0.29666 6 1.2823 6L5.7177 6C6.70335 6 7.31937 5 6.82655 4.2L4.60885 0.6Z"
+                fill="#22C55E"
+              />
+            </svg>
+            <p class="text-white">+$1.232 <span class="text-[#9CA3AF]">today</span></p>
+          </div>
+          <div class="flex gap-1 items-center text-sm font-medium text-[#DF3C2E]">
+            <svg
+              width="4"
+              height="4"
+              viewBox="0 0 4 4"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="4" height="4" rx="2" fill="#DF3C2E" />
+            </svg>
+            High risk
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center p-2.5 pb-10">
+        <img src="@/assets/images/gho.png" alt="stability" class="w-25 h-25 object-cover" />
+      </div>
+      <div class="bg-white/4 rounded-[1.25rem]">
+        <div
+          class="flex py-3 px-3.5 border-b text-sm font-medium border-white/8 items-center justify-between"
+        >
+          <p class="text-[#9CA3AF]">Earnings 24h</p>
+          <div class="flex items-center gap-3">$0 USDT <Info text="Earnings 24h" /></div>
+        </div>
+        <div class="flex py-3 px-3.5 text-sm font-medium items-center justify-between">
+          <p class="text-[#9CA3AF]">Possible income</p>
+          <div class="flex items-center gap-3">up to 1% <Info text="Earnings 24h" /></div>
+        </div>
+      </div>
+      <button
+        class="bg-[#4E80EE] border border-[#70A3F3] w-full mt-5 block text-sm font-medium py-3 px-4 rounded-full"
+      >
+        START EARNING
+      </button>
+    </div>
+  </section>
 </template>
