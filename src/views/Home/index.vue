@@ -1,6 +1,51 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
+import { ref } from 'vue'
 import Icons from '@/components/shared/Icons.vue'
 import Info from '@/components/shared/Info.vue'
+
+const faqItems = [
+  {
+    question: 'What is the Lending Protocol of Fluid?',
+    answer:
+      "The Lending Protocol is the 'Deposit and Earn' side of the Fluid protocol. Supply to the Fluid protocol through this simple UX and earn yield on your supplied asset in kind.",
+  },
+  {
+    question: 'Why is this separate from borrowing?',
+    answer:
+      'The Lending Protocol is the deposit and earn side of the Fluid protocol. Supply to the Fluid protocol through this simple UX and earn yield on your supplied asset in kind.',
+  },
+  {
+    question: 'Are there supply or withdraw limits?',
+    answer:
+      'The Lending Protocol is the deposit and earn side of the Fluid protocol. Supply to the Fluid protocol through this simple UX and earn yield on your supplied asset in kind.',
+  },
+  {
+    question: 'What are the risks?',
+    answer:
+      'The Lending Protocol is the deposit and earn side of the Fluid protocol. Supply to the Fluid protocol through this simple UX and earn yield on your supplied asset in kind.',
+  },
+  {
+    question: 'What are the fees for the Lending Protocol?',
+    answer:
+      'The Lending Protocol is the deposit and earn side of the Fluid protocol. Supply to the Fluid protocol through this simple UX and earn yield on your supplied asset in kind.',
+  },
+  {
+    question: 'Are there additional rewards?',
+    answer:
+      'The Lending Protocol is the deposit and earn side of the Fluid protocol. Supply to the Fluid protocol through this simple UX and earn yield on your supplied asset in kind.',
+  },
+]
+
+const openFaqIndex = ref<number | null>(null)
+
+const toggleFaq = (index: number) => {
+  if (openFaqIndex.value === index) {
+    openFaqIndex.value = null
+  } else {
+    openFaqIndex.value = index
+  }
+}
 </script>
 
 <template>
@@ -246,20 +291,90 @@ import Info from '@/components/shared/Info.vue'
         <Icons name="arrow-right" :size="16" />
       </div>
       <div class="space-y-3.5">
-        <div class="flex items-center gap-2">
+        <div class="flex items-start gap-2">
           <Icons name="check" class="text-[#22C55E]" />
           <p class="text-sm font-medium">Longest running stETH Strategy</p>
         </div>
-        <div class="flex items-center gap-2">
-          <Icons name="check" class="text-[#22C55E] flex-1" />
-          <p class="text-sm font-medium">Diversified with popular DeFi lending Protocols
-            including Fluid, AAVE, Spark And Compound</p>
+        <div class="flex items-start gap-2">
+          <Icons name="check" class="text-[#22C55E] mt-1" />
+          <p class="text-sm font-medium flex-1">
+            Diversified with popular DeFi lending Protocols including Fluid, AAVE, Spark And
+            Compound
+          </p>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-start gap-2">
           <Icons name="check" class="text-[#22C55E]" />
-          <p class="text-sm font-medium">Longest running stETH Strategy</p>
+          <p class="text-sm font-medium">Earn +1.5x on your stETH earnings</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <h1 class="text-[2.5rem] font-semibold">FAQS</h1>
+      <span class="text-[#9CA3AF] text-sm">
+        Here you can find all the frequently asked questions!
+      </span>
+      <div class="bg-white/4 space-y-2.5 py-4 px-3.5 text-left rounded-[2.5rem] mt-7.5">
+        <div
+          v-for="(item, index) in faqItems"
+          :key="index"
+          class="cursor-pointer"
+          @click="toggleFaq(index)"
+        >
+          <div class="p-5 rounded-[1.25rem]" :class="{ 'bg-white/5': openFaqIndex === index }">
+            <div class="flex items-center justify-between">
+              <p class="text-xl font-medium">{{ item.question }}</p>
+              <button
+                class="w-7.5 h-7.5 aspect-square flex items-center justify-center bg-[#1E2939] rounded-full hover:bg-[#1E2939]/80 transition-colors delay-100"
+                :class="{ 'rotate-45 bg-[#5072E6] hover:bg-[#5072E6]/80': openFaqIndex === index }"
+                @click.stop="toggleFaq(index)"
+              >
+                <Icons name="plus" :size="12" class="text-white transition" />
+              </button>
+            </div>
+            <transition name="faq">
+              <div v-if="openFaqIndex === index" class="mt-4">
+                <p class="text-[#9CA3AF] text-sm leading-6">
+                  {{ item.answer }}
+                </p>
+              </div>
+            </transition>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.faq-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.faq-leave-active {
+  transition: all 0.2s ease-in;
+}
+
+.faq-enter-from {
+  opacity: 0;
+  transform: translateY(-10px);
+  max-height: 0;
+}
+
+.faq-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 200px;
+}
+
+.faq-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 200px;
+}
+
+.faq-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+  max-height: 0;
+}
+</style>
