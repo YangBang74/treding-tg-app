@@ -321,7 +321,7 @@ const toggleFaq = (index: number) => {
           @click="toggleFaq(index)"
         >
           <div class="p-5 rounded-[1.25rem]" :class="{ 'bg-white/5': openFaqIndex === index }">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between gap-2">
               <p class="text-xl font-medium">{{ item.question }}</p>
               <button
                 class="w-7.5 h-7.5 aspect-square flex items-center justify-center bg-[#1E2939] rounded-full hover:bg-[#1E2939]/80 transition-colors delay-100"
