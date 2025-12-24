@@ -4,7 +4,7 @@ import Info from '@/components/shared/Info.vue'
 </script>
 
 <template>
-  <section class="text-white py-7.5 p-4 space-y-4">
+  <div class="text-white py-7.5 p-4 space-y-4">
     <div class="space-y-3.5 text-center">
       <div class="flex items-center gap-2.5 justify-center">
         <div class="bg-[#4E80EE] p-2.75 rounded-full">
@@ -109,5 +109,157 @@ import Info from '@/components/shared/Info.vue'
         START EARNING
       </button>
     </div>
-  </section>
+    <div class="bg-linear-to-b from-[#3B82F6]/20 to-[#3B82F6]/10 rounded-[1.25rem] p-5">
+      <div class="flex items-center justify-between">
+        <div class="flex items-start flex-col justify-between">
+          <p class="text-xl font-semibold text-[#3B82F6] leading-7.5">Smart</p>
+          <p class="text-sm font-medium">$0.00</p>
+        </div>
+        <div class="flex items-end flex-col justify-between">
+          <div class="flex gap-1 items-center text-s, font-medium text-[#43C761] leading-7.5">
+            <svg
+              width="7"
+              height="6"
+              viewBox="0 0 7 6"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4.60885 5.4C4.11603 6.2 2.88397 6.2 2.39115 5.4L0.17345 1.8C-0.31937 1 0.29666 0 1.2823 0L5.7177 0C6.70335 0 7.31937 1 6.82655 1.8L4.60885 5.4Z"
+                fill="#DF3C2E"
+              />
+            </svg>
+
+            <p class="text-white">-$0.232 <span class="text-[#9CA3AF]">today</span></p>
+          </div>
+          <div class="flex gap-1 items-center text-sm font-medium text-[#E9B306]">
+            <svg
+              width="4"
+              height="4"
+              viewBox="0 0 4 4"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="4" height="4" rx="2" fill="#E9B306" />
+            </svg>
+
+            Average risk
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center p-2.5 pb-10">
+        <img src="@/assets/images/smart.png" alt="stability" class="w-25 h-25 object-cover" />
+      </div>
+      <div class="bg-white/4 rounded-[1.25rem]">
+        <div
+          class="flex py-3 px-3.5 border-b text-sm font-medium border-white/8 items-center justify-between"
+        >
+          <p class="text-[#9CA3AF]">Earnings 24h</p>
+          <div class="flex items-center gap-3">$0 USDT <Info text="Earnings 24h" /></div>
+        </div>
+        <div
+          class="flex py-3 px-3.5 border-b text-sm border-white/8 font-medium items-center justify-between"
+        >
+          <p class="text-[#9CA3AF]">Possible income</p>
+          <div class="flex items-center gap-3">up to 1% <Info text="Earnings 24h" /></div>
+        </div>
+        <div class="flex py-3 px-3.5 text-sm font-medium items-center justify-between">
+          <p class="text-[#9CA3AF]">Possible risk</p>
+          <div class="flex items-center gap-3">-20% month <Info text="Earnings 24h" /></div>
+        </div>
+      </div>
+      <button
+        class="bg-[#4E80EE] border border-[#70A3F3] w-full mt-5 block text-sm font-medium py-3 px-4 rounded-full"
+      >
+        START EARNING
+      </button>
+    </div>
+    <div class="bg-linear-to-b from-[#AD00FF]/20 to-[#AD00FF]/10 rounded-[1.25rem] p-5">
+      <div class="flex items-center justify-between">
+        <div class="flex items-start flex-col justify-between">
+          <p class="text-xl font-semibold text-[#AD00FF] leading-7.5">Power</p>
+          <p class="text-sm font-medium">$0.00</p>
+        </div>
+        <div class="flex items-end flex-col justify-between">
+          <div class="flex gap-1 items-center text-s, font-medium text-[#43C761] leading-7.5">
+            <svg
+              width="7"
+              height="6"
+              viewBox="0 0 7 6"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4.60885 0.6C4.11603 -0.2 2.88397 -0.2 2.39115 0.6L0.17345 4.2C-0.31937 5 0.29666 6 1.2823 6L5.7177 6C6.70335 6 7.31937 5 6.82655 4.2L4.60885 0.6Z"
+                fill="#22C55E"
+              />
+            </svg>
+            <p class="text-white">+$1.232 <span class="text-[#9CA3AF]">today</span></p>
+          </div>
+          <div class="flex gap-1 items-center text-sm font-medium text-[#22C55E]">
+            <svg
+              width="4"
+              height="4"
+              viewBox="0 0 4 4"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="4" height="4" rx="2" fill="#22C55E" />
+            </svg>
+            No risk
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center p-2.5 pb-10">
+        <img src="@/assets/images/power.png" alt="stability" class="w-25 h-25 object-cover" />
+      </div>
+      <div class="bg-white/4 rounded-[1.25rem]">
+        <div
+          class="flex py-3 px-3.5 border-b text-sm font-medium border-white/8 items-center justify-between"
+        >
+          <p class="text-[#9CA3AF]">Earnings 24h</p>
+          <div class="flex items-center gap-3">$0 USDT <Info text="Earnings 24h" /></div>
+        </div>
+        <div
+          class="flex py-3 px-3.5 border-b text-sm border-white/8 font-medium items-center justify-between"
+        >
+          <p class="text-[#9CA3AF]">Possible income</p>
+          <div class="flex items-center gap-3">up to 1% <Info text="Earnings 24h" /></div>
+        </div>
+        <div class="flex py-3 px-3.5 text-sm font-medium items-center justify-between">
+          <p class="text-[#9CA3AF]">Possible risk</p>
+          <div class="flex items-center gap-3">-20% month <Info text="Earnings 24h" /></div>
+        </div>
+      </div>
+      <button
+        class="bg-[#4E80EE] border border-[#70A3F3] w-full mt-5 block text-sm font-medium py-3 px-4 rounded-full"
+      >
+        START EARNING
+      </button>
+    </div>
+    <div class="bg-white text-[#111827] p-5 rounded-[1.25rem]">
+      <div class="flex items-center justify-between mb-5">
+        <div class="flex items-center gap-4">
+          <Icons name="lite" />
+          <p class="text-3xl font-medium">Lite</p>
+        </div>
+        <Icons name="arrow-right" :size="16" />
+      </div>
+      <div class="space-y-3.5">
+        <div class="flex items-center gap-2">
+          <Icons name="check" class="text-[#22C55E]" />
+          <p class="text-sm font-medium">Longest running stETH Strategy</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <Icons name="check" class="text-[#22C55E] flex-1" />
+          <p class="text-sm font-medium">Diversified with popular DeFi lending Protocols
+            including Fluid, AAVE, Spark And Compound</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <Icons name="check" class="text-[#22C55E]" />
+          <p class="text-sm font-medium">Longest running stETH Strategy</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
