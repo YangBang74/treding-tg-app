@@ -46,23 +46,23 @@ onBeforeUnmount(() => {
     <Transition name="dialog">
       <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center px-6">
         <button
-          class="absolute inset-0 bg-black/60"
+          class="absolute inset-0 bg-black/60 backdrop-blur-[0.25rem]"
           type="button"
           aria-label="Закрыть"
           @click="close"
         />
 
         <div
-          class="relative w-full max-w-[320px] rounded-3xl bg-white p-3 text-[#484C52] shadow-2xl transition"
+          class="relative w-full max-w-[20.8125rem] rounded-3xl bg-[#090D14] p-3 text-white shadow-2xl transition z-100000"
           @click.stop
         >
           <button
-            class="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-black/5 text-lg font-medium text-black/70 transition hover:bg-black/10 hover:text-black"
+            class="absolute right-7 top-7 flex h-7.5 w-7.5 items-center justify-center rounded-full bg-white/8 text-lg font-medium text-white transition hover:bg-black/10 hover:text-black"
             type="button"
             aria-label="Закрыть"
             @click="close"
           >
-            <Icons name="x" />
+            <Icons name="x" :size="14" />
           </button>
 
           <slot :close="close" />

@@ -3,6 +3,29 @@
 import { ref } from 'vue'
 import Icons from '@/components/shared/Icons.vue'
 import Info from '@/components/shared/Info.vue'
+import DepositDialog from './ui/DepositDialog.vue'
+
+const isDialogOpen = ref(false)
+const selectedProduct = ref<{
+  title: string
+  yourAssets: string
+  roi: string
+  totalVolume: string
+  traders: number
+  balance: string
+} | null>(null)
+
+const openDialog = (product: {
+  title: string
+  yourAssets: string
+  roi: string
+  totalVolume: string
+  traders: number
+  balance: string
+}) => {
+  selectedProduct.value = product
+  isDialogOpen.value = true
+}
 
 const faqItems = [
   {
@@ -149,6 +172,16 @@ const toggleFaq = (index: number) => {
         </div>
       </div>
       <button
+        @click="
+          openDialog({
+            title: 'Stability',
+            yourAssets: '$100.00',
+            roi: 'up to 1%',
+            totalVolume: '$34,214.22',
+            traders: 112,
+            balance: '$1112.21',
+          })
+        "
         class="bg-[#4E80EE] border border-[#70A3F3] w-full mt-5 block text-sm font-medium py-3 px-4 rounded-full"
       >
         START EARNING
@@ -214,6 +247,17 @@ const toggleFaq = (index: number) => {
         </div>
       </div>
       <button
+        @click="
+          openDialog({
+            title: 'Smart',
+            image: '@/assets/images/smart.png',
+            yourAssets: '$100.00',
+            roi: 'up to 1%',
+            totalVolume: '$34,214.22',
+            traders: 112,
+            balance: '$1112.21',
+          })
+        "
         class="bg-[#4E80EE] border border-[#70A3F3] w-full mt-5 block text-sm font-medium py-3 px-4 rounded-full"
       >
         START EARNING
@@ -277,6 +321,16 @@ const toggleFaq = (index: number) => {
         </div>
       </div>
       <button
+        @click="
+          openDialog({
+            title: 'Power',
+            yourAssets: '$100.00',
+            roi: 'up to 1%',
+            totalVolume: '$34,214.22',
+            traders: 112,
+            balance: '$1112.21',
+          })
+        "
         class="bg-[#4E80EE] border border-[#70A3F3] w-full mt-5 block text-sm font-medium py-3 px-4 rounded-full"
       >
         START EARNING
@@ -343,6 +397,16 @@ const toggleFaq = (index: number) => {
       </div>
     </div>
   </div>
+  <DepositDialog
+    v-if="selectedProduct"
+    v-model:open="isDialogOpen"
+    :title="selectedProduct.title"
+    :your-assets="selectedProduct.yourAssets"
+    :roi="selectedProduct.roi"
+    :total-volume="selectedProduct.totalVolume"
+    :traders="selectedProduct.traders"
+    :balance="selectedProduct.balance"
+  />
 </template>
 
 <style scoped>

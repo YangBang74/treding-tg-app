@@ -328,4 +328,20 @@ const color = computed(() => props.color || 'currentColor')
       stroke-linejoin="round"
     />
   </svg>
+  <svg v-else-if="props.name === 'user'" :width="size ? size : 12" :height="size ? size : 14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M5.72425 6.53323C7.16039 6.53323 8.32461 5.36901 8.32461 3.93288C8.32461 2.49674 7.16039 1.33252 5.72425 1.33252C4.28812 1.33252 3.1239 2.49674 3.1239 3.93288C3.1239 5.36901 4.28812 6.53323 5.72425 6.53323Z"
+      :fill="color"
+      :stroke="color"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M9.70534 10.1866C10.9773 11.0338 10.1184 12.6677 8.59015 12.6677H2.85108C1.32282 12.6677 0.463923 11.0338 1.73589 10.1866C2.87681 9.42674 4.24699 8.98389 5.72061 8.98389C7.19423 8.98389 8.56442 9.42674 9.70534 10.1866Z"
+      :fill="color"
+      :stroke="color"
+      stroke-width="1.5"
+    />
+  </svg>
 </template>
