@@ -3,6 +3,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import Icons from '@/components/shared/Icons.vue'
 import Info from '@/components/shared/Info.vue'
+import HistoryTable, { type Column } from './ui/HistoryTable.vue'
 
 type TabType = 'deposit' | 'withdraw'
 type HistoryTabType = 'depositing' | 'withdrawal' | 'referrals'
@@ -74,6 +75,29 @@ onMounted(() => {
 onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
 })
+
+// Конфигурация колонок для таблиц
+const depositingColumns: Column[] = [
+  { key: 'coin', label: 'Coin', align: 'center' },
+  { key: 'total', label: 'Total', align: 'center' },
+  { key: 'status', label: 'Status', align: 'center', showStatusDot: true },
+]
+
+const withdrawalColumns: Column[] = [
+  { key: 'coin', label: 'Coin', align: 'center' },
+  { key: 'total', label: 'Total', align: 'center' },
+  { key: 'status', label: 'Status', align: 'center', showStatusDot: true },
+]
+
+const referralsColumns: Column[] = [
+  { key: 'user', label: 'User', align: 'left' },
+  {
+    key: 'percent',
+    label: '%',
+    align: 'right',
+    cellClass: 'font-medium text-[#22C55E]',
+  },
+]
 </script>
 
 <template>
@@ -206,104 +230,29 @@ onUnmounted(() => {
         </div>
 
         <!-- Таблица Depositing -->
-        <div v-if="activeHistoryTab === 'depositing'" class="space-y-2 bg-white/4">
-          <div
-            class="grid grid-cols-3 text-center gap-4 px-3 py-2 text-xs font-medium text-[#9CA3AF] mb-2"
-          >
-            <div>Coin</div>
-            <div>Total</div>
-            <div>Status</div>
-          </div>
-          <div
-            v-for="item in depositingData"
-            :key="item.id"
-            class="rounded-xl p-3 grid grid-cols-3 text-center gap-4 items-center"
-          >
-            <div class="text-sm font-medium text-white">{{ item.coin }}</div>
-            <div class="text-sm font-medium text-white">{{ item.total }}</div>
-            <div class="flex items-center gap-2">
-              <span
-                class="w-2 h-2 rounded-full"
-                :class="
-                  item.status === 'done'
-                    ? 'bg-[#22C55E]'
-                    : item.status === 'cancel'
-                      ? 'bg-[#DF3C2E]'
-                      : 'bg-[#3B82F6]'
-                "
-              />
-              <span
-                class="text-xs font-medium"
-                :class="
-                  item.status === 'done'
-                    ? 'text-[#22C55E]'
-                    : item.status === 'cancel'
-                      ? 'text-[#DF3C2E]'
-                      : 'text-[#3B82F6]'
-                "
-              >
-                {{ item.status }}
-              </span>
-            </div>
-          </div>
-        </div>
+        <HistoryTable
+          v-if="activeHistoryTab === 'depositing'"
+          :columns="depositingColumns"
+          :data="depositingData"
+          status="depositing"
+          container-bg
+        />
 
         <!-- Таблица Withdrawal -->
-        <div v-if="activeHistoryTab === 'withdrawal'" class="space-y-2">
-          <div class="grid grid-cols-3 gap-4 px-3 py-2 text-xs font-medium text-[#9CA3AF] mb-2">
-            <div>Coin</div>
-            <div>Total</div>
-            <div>Status</div>
-          </div>
-          <div
-            v-for="item in withdrawalData"
-            :key="item.id"
-            class="bg-white/4 rounded-xl p-3 grid grid-cols-3 gap-4 items-center"
-          >
-            <div class="text-sm font-medium text-white">{{ item.coin }}</div>
-            <div class="text-sm font-medium text-white">{{ item.total }}</div>
-            <div class="flex items-center gap-2">
-              <span
-                class="w-2 h-2 rounded-full"
-                :class="
-                  item.status === 'done'
-                    ? 'bg-[#22C55E]'
-                    : item.status === 'cancel'
-                      ? 'bg-[#DF3C2E]'
-                      : 'bg-[#3B82F6]'
-                "
-              />
-              <span
-                class="text-xs font-medium"
-                :class="
-                  item.status === 'done'
-                    ? 'text-[#22C55E]'
-                    : item.status === 'cancel'
-                      ? 'text-[#DF3C2E]'
-                      : 'text-[#3B82F6]'
-                "
-              >
-                {{ item.status }}
-              </span>
-            </div>
-          </div>
-        </div>
+        <HistoryTable
+          v-if="activeHistoryTab === 'withdrawal'"
+          :columns="withdrawalColumns"
+          :data="withdrawalData"
+          status="withdrawal"
+        />
 
         <!-- Таблица Referrals -->
-        <div v-if="activeHistoryTab === 'referrals'" class="space-y-2">
-          <div class="grid grid-cols-2 gap-4 px-3 py-2 text-xs font-medium text-[#9CA3AF] mb-2">
-            <div>User</div>
-            <div>%</div>
-          </div>
-          <div
-            v-for="item in referralsData"
-            :key="item.id"
-            class="bg-white/4 rounded-xl p-3 grid grid-cols-2 gap-4 items-center"
-          >
-            <div class="text-sm font-medium text-white">{{ item.user }}</div>
-            <div class="text-sm font-medium text-[#22C55E]">{{ item.percent }}</div>
-          </div>
-        </div>
+        <HistoryTable
+          v-if="activeHistoryTab === 'referrals'"
+          :columns="referralsColumns"
+          :data="referralsData"
+          status="referrals"
+        />
       </div>
     </div>
   </section>
