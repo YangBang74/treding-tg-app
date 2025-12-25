@@ -250,7 +250,6 @@ const toggleFaq = (index: number) => {
         @click="
           openDialog({
             title: 'Smart',
-            image: '@/assets/images/smart.png',
             yourAssets: '$100.00',
             roi: 'up to 1%',
             totalVolume: '$34,214.22',
