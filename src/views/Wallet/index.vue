@@ -4,6 +4,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import Icons from '@/components/shared/Icons.vue'
 import Info from '@/components/shared/Info.vue'
 import HistoryTable, { type Column } from './ui/HistoryTable.vue'
+import SuccessDialog from './ui/SuccessDialog.vue'
 
 type TabType = 'deposit' | 'withdraw'
 type HistoryTabType = 'depositing' | 'withdrawal' | 'referrals'
@@ -52,6 +53,8 @@ const networks = ['TON', 'ETH', 'BTC', 'USDT', 'USDC']
 const selectedNetwork = ref('TON')
 const isNetworkOpen = ref(false)
 const networkDropdownRef = ref<HTMLElement | null>(null)
+const depositAmount = ref('')
+const isSuccessDialogOpen = ref(false)
 
 const selectNetwork = (network: string) => {
   selectedNetwork.value = network
@@ -98,6 +101,17 @@ const referralsColumns: Column[] = [
     cellClass: 'font-medium text-[#22C55E]',
   },
 ]
+
+const handleSubmit = () => {
+  if (depositAmount.value) {
+    isSuccessDialogOpen.value = true
+  }
+}
+
+const handleCloseDialog = () => {
+  isSuccessDialogOpen.value = false
+  depositAmount.value = ''
+}
 </script>
 
 <template>
@@ -174,16 +188,20 @@ const referralsColumns: Column[] = [
               </div>
             </transition>
           </div>
-          <p class="text-[#9CA3AF] text-xs font-medium">Deposit</p>
+          <p class="text-[#9CA3AF] text-xs font-medium">
+            {{ activeTab === 'deposit' ? 'Deposit' : 'Withdraw' }}
+          </p>
           <input
+            v-model="depositAmount"
             type="number"
             placeholder="$0.00"
             class="bg-white/4 py-3 w-full focus:outline-none focus:border-white/8 border-transparent border px-5 rounded-[2.5rem] font-medium flex items-center justify-between"
           />
           <button
+            @click="handleSubmit"
             class="bg-[#4E80EE] border border-[#70A3F3] w-full mt-5 block text-sm font-medium py-2 px-4 rounded-full"
           >
-            DEPOSIT
+            {{ activeTab === 'deposit' ? 'DEPOSIT' : 'WITHDRAW' }}
           </button>
         </div>
       </div>
@@ -256,6 +274,13 @@ const referralsColumns: Column[] = [
       </div>
     </div>
   </section>
+  <SuccessDialog
+    v-model:open="isSuccessDialogOpen"
+    :network="selectedNetwork"
+    :price="depositAmount ? `$${depositAmount}` : ''"
+    :type="activeTab"
+    @close="handleCloseDialog"
+  />
 </template>
 
 <style scoped>

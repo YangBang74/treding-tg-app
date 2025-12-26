@@ -17,15 +17,12 @@ import Header from './Header.vue'
   <img
     src="@/assets/images/background.svg"
     alt="background"
-    class="absolute top-0 left-0 w-full h-full object-cover object-top z-0!"
+    class="fixed top-0 sm:hidden left-0 w-full h-full object-cover object-top z-0!"
   />
 </template>
 <style scoped>
 .layout {
   background: radial-gradient(50% 50% at 50% 50%, #090d14 0%, #121212 100%);
-  background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
 }
 
 .layout__container {

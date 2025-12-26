@@ -26,7 +26,18 @@ const props = withDefaults(defineProps<Props>(), {
   status: undefined,
 })
 
-const gridCols = computed(() => `grid-cols-${props.columns.length}`)
+const gridCols = computed(() => {
+  const cols = props.columns.length
+  const gridMap: Record<number, string> = {
+    1: 'grid-cols-1',
+    2: 'grid-cols-2',
+    3: 'grid-cols-3',
+    4: 'grid-cols-4',
+    5: 'grid-cols-5',
+    6: 'grid-cols-6',
+  }
+  return gridMap[cols] || 'grid-cols-1'
+})
 
 const getStatusColor = (status: string) => {
   if (status === 'done') {
