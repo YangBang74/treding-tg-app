@@ -33,10 +33,14 @@ export interface TerminalCardData {
   }[]
   amount?: string
   total?: string
+  buyIndex?: number
+  sellIndex?: number
 }
 
 interface Props {
   data: TerminalCardData
+  buyIndex?: number
+  sellIndex?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -54,12 +58,35 @@ const props = withDefaults(defineProps<Props>(), {
     amount: '',
     total: '',
   }),
+  buyIndex: undefined,
+  sellIndex: undefined,
 })
 
 const selectedPeriod = ref(props.data.periods?.[3] || '1Y')
 const periods = computed(() => props.data.periods || ['1D', '1W', '1M', '1Y'])
 const selectedRightTab = ref<'timer' | 'quarter'>('timer')
 const isChartVisible = ref(false)
+
+// Индексы для BUY и SELL точек - приоритет у пропсов, затем у data, затем дефолтные значения
+const buyIndexValue = computed(() => {
+  if (props.buyIndex !== undefined) {
+    return props.buyIndex
+  }
+  if (props.data.buyIndex !== undefined) {
+    return props.data.buyIndex
+  }
+  return 0
+})
+
+const sellIndexValue = computed(() => {
+  if (props.sellIndex !== undefined) {
+    return props.sellIndex
+  }
+  if (props.data.sellIndex !== undefined) {
+    return props.data.sellIndex
+  }
+  return props.data.chartCategories.length > 1 ? props.data.chartCategories.length - 1 : 0
+})
 
 // Chart options
 const chartOptions = computed(
@@ -98,17 +125,7 @@ const chartOptions = computed(
       show: false,
     },
     tooltip: {
-      theme: 'dark',
-      custom: ({ series, dataPointIndex }) => {
-        const value = series[0]?.[dataPointIndex] as number
-        return `
-          <div class="bg-[#3D346E] p-1.25  border-0 shadow-none left-2 bottom-4">
-            <div class="text-white text-sm">
-              <div>Borrow: ${value !== undefined ? value.toFixed(2) : '0.00'}%</div>
-            </div>
-          </div>
-        `
-      },
+      enabled: false, // Отключаем tooltip при наведении
     },
   }),
 )
@@ -122,6 +139,13 @@ const chartData = computed(() => {
         ? [props.data.chartSeries[0]]
         : []
 
+  const seriesData = purpleSeries[0]?.data || []
+  const categories = props.data.chartCategories
+
+  // Получаем значения для BUY и SELL точек
+  const buyValue = seriesData[buyIndexValue.value] || 0
+  const sellValue = seriesData[sellIndexValue.value] || 0
+
   return {
     series: purpleSeries,
     chartOptions: {
@@ -130,9 +154,98 @@ const chartData = computed(() => {
         ...chartOptions.value.xaxis,
         categories: props.data.chartCategories,
       },
+      markers: {
+        size: 0,
+        hover: {
+          size: 0, // Отключаем маркеры при наведении
+        },
+        discrete: [
+          {
+            seriesIndex: 0,
+            dataPointIndex: buyIndexValue.value,
+            fillColor: '#AD00FF',
+            strokeColor: '#AD00FF',
+            size: 6,
+          },
+          {
+            seriesIndex: 0,
+            dataPointIndex: sellIndexValue.value,
+            fillColor: '#22C55E',
+            strokeColor: '#22C55E',
+            size: 6,
+          },
+        ],
+      },
+      // annotations: {
+      //   points: [
+      //     {
+      //       x:
+      //         categories[buyIndexValue.value] !== undefined
+      //           ? categories[buyIndexValue.value]
+      //           : buyIndexValue.value,
+      //       y: buyValue,
+      //       yAxisIndex: 0,
+      //       xAxisIndex: 0,
+      //       marker: {
+      //         size: 0, // Скрываем стандартный маркер аннотации
+      //       },
+      //       label: {
+      //         text: 'BUY',
+      //         style: {
+      //           color: '#ffffff',
+      //           fontSize: '14px',
+      //           fontWeight: 400,
+      //           background: '#3D346E',
+      //           padding: {
+      //             left: 5,
+      //             right: 5,
+      //             top: 2.5,
+      //             bottom: 2.5,
+      //           },
+      //           borderRadius: '4px',
+      //         },
+      //         offsetY: -20,
+      //         offsetX: 0,
+      //         textAnchor: 'middle',
+      //       },
+      //     },
+      //     {
+      //       x:
+      //         categories[sellIndexValue.value] !== undefined
+      //           ? categories[sellIndexValue.value]
+      //           : sellIndexValue.value,
+      //       y: sellValue,
+      //       yAxisIndex: 0,
+      //       xAxisIndex: 0,
+      //       marker: {
+      //         size: 0,
+      //       },
+      //       label: {
+      //         text: 'SELL',
+      //         style: {
+      //           color: '#ffffff',
+      //           fontSize: '14px',
+      //           fontWeight: 400,
+      //           background: '#3D346E',
+      //           padding: {
+      //             left: 5,
+      //             right: 5,
+      //             top: 2.5,
+      //             bottom: 2.5,
+      //           },
+      //           borderRadius: '4px',
+      //         },
+      //         offsetY: -20,
+      //         offsetX: 0,
+      //         textAnchor: 'middle',
+      //       },
+      //     },
+      //   ],
+      // },
     },
   }
 })
+
 </script>
 
 <template>

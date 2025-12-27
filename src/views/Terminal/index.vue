@@ -152,6 +152,6 @@ const terminalCards = ref<TerminalCardData[]>([
 
 <template>
   <section class="text-white p-4 space-y-5">
-    <TerminalCard v-for="(card, index) in terminalCards" :key="index" :data="card" />
+    <TerminalCard v-for="(card, index) in terminalCards" :key="index" :data="card" :buy-index="3" :sell-index="6" />
   </section>
 </template>
