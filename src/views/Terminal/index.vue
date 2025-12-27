@@ -2,6 +2,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import TerminalCard, { type TerminalCardData } from './ui/TerminalCard.vue'
+import powerImage from '@/assets/images/power.png'
+import ethImage from '@/assets/images/eth.png'
+import usdeImage from '@/assets/images/usde.png'
 
 // Generate sample chart data
 const generateChartData = () => {
@@ -27,7 +30,7 @@ const generateChartData = () => {
 // Sample data for terminal cards
 const terminalCards = ref<TerminalCardData[]>([
   {
-    logo: '/src/assets/images/power.png',
+    logo: powerImage,
     name: 'ETH',
     priceChange: '+$58 USDT',
     priceChangeColor: '#22C55E',
@@ -66,7 +69,7 @@ const terminalCards = ref<TerminalCardData[]>([
     total: '10$',
   },
   {
-    logo: '/src/assets/images/eth.png',
+    logo: ethImage,
     name: 'weETH',
     priceChange: '+$58 USDT',
     priceChangeColor: '#22C55E',
@@ -105,7 +108,7 @@ const terminalCards = ref<TerminalCardData[]>([
     total: '10$',
   },
   {
-    logo: '/src/assets/images/usde.png',
+    logo: usdeImage,
     name: 'sUSDe',
     priceChange: '+$58 USDT',
     priceChangeColor: '#22C55E',

@@ -3,6 +3,7 @@
 import { ref, computed } from 'vue'
 import Icons from '@/components/shared/Icons.vue'
 import EventBlock from './ui/EventBlock.vue'
+import referallImage from '@/assets/images/referall.png'
 
 type ReferralTabType = '1' | '2'
 
@@ -19,7 +20,7 @@ const allEvents = [
     title: 'Referal boom',
     status: 'active' as const,
     description: 'Получайте комиссионные от пополнения друзей',
-    image: '/src/assets/images/referall.png',
+    image: referallImage,
     buttonText: 'Read More',
   },
   {
@@ -27,7 +28,7 @@ const allEvents = [
     title: 'Trading Challenge',
     status: 'active' as const,
     description: 'Соревнуйтесь с другими трейдерами и выигрывайте призы',
-    image: '/src/assets/images/referall.png',
+    image: referallImage,
     buttonText: 'Участвовать',
   },
   {
@@ -35,7 +36,7 @@ const allEvents = [
     title: 'Weekly Bonus',
     status: 'inactive' as const,
     description: 'Еженедельные бонусы за активность на платформе',
-    image: '/src/assets/images/referall.png',
+    image: referallImage,
     buttonText: 'Подробнее',
   },
   {
@@ -43,7 +44,7 @@ const allEvents = [
     title: 'VIP Program',
     status: 'active' as const,
     description: 'Станьте VIP-участником и получите эксклюзивные привилегии',
-    image: '/src/assets/images/referall.png',
+    image: referallImage,
     buttonText: 'Узнать больше',
   },
 ]

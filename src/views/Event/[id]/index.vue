@@ -3,12 +3,13 @@
 import Icons from '@/components/shared/Icons.vue'
 import Info from '@/components/shared/Info.vue'
 import TaskCard from '@/views/Event/ui/TaskCard.vue'
+import ghoImage from '@/assets/images/gho.png'
 
 // Пример данных для задач
 const tasks = [
   {
     id: 1,
-    avatar: '/src/assets/images/gho.png', // Замените на реальный путь к изображению
+    avatar: ghoImage,
     title: 'My Friend',
     description: 'Пригласите 1 друга',
     current: 1,
@@ -17,7 +18,7 @@ const tasks = [
   },
   {
     id: 2,
-    avatar: '/src/assets/images/gho.png',
+    avatar: ghoImage,
     title: 'Hi Friend',
     description: 'Пригласите 5 друзей',
     current: 4,
@@ -26,7 +27,7 @@ const tasks = [
   },
   {
     id: 3,
-    avatar: '/src/assets/images/gho.png',
+    avatar: ghoImage,
     title: 'Первое выполнение',
     description: 'Пригласите 5 друзей',
     current: 0,

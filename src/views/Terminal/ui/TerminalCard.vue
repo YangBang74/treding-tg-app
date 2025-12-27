@@ -72,7 +72,7 @@ const chartOptions = computed(
       zoom: { enabled: false },
       background: 'transparent',
     },
-    colors: ['#3B82F6', '#AD00FF'],
+    colors: ['#AD00FF'],
     stroke: {
       curve: 'smooth',
       width: 2,
@@ -100,13 +100,11 @@ const chartOptions = computed(
     tooltip: {
       theme: 'dark',
       custom: ({ series, dataPointIndex }) => {
-        const supplyValue = series[0][dataPointIndex] as number
-        const borrowValue = series[1]?.[dataPointIndex] as number
+        const value = series[0]?.[dataPointIndex] as number
         return `
           <div class="bg-[#3D346E] p-1.25  border-0 shadow-none left-2 bottom-4">
             <div class="text-white text-sm">
-              <div>Supply: ${supplyValue.toFixed(2)}%</div>
-              ${borrowValue !== undefined ? `<div>Borrow: ${borrowValue.toFixed(2)}%</div>` : ''}
+              <div>Borrow: ${value !== undefined ? value.toFixed(2) : '0.00'}%</div>
             </div>
           </div>
         `
@@ -115,61 +113,72 @@ const chartOptions = computed(
   }),
 )
 
-const chartData = computed(() => ({
-  series: props.data.chartSeries,
-  chartOptions: {
-    ...chartOptions.value,
-    xaxis: {
-      ...chartOptions.value.xaxis,
-      categories: props.data.chartCategories,
+const chartData = computed(() => {
+  // Берем только последний (фиолетовый) график из серий
+  const purpleSeries =
+    props.data.chartSeries.length > 1
+      ? [props.data.chartSeries[props.data.chartSeries.length - 1]]
+      : props.data.chartSeries.length > 0
+        ? [props.data.chartSeries[0]]
+        : []
+
+  return {
+    series: purpleSeries,
+    chartOptions: {
+      ...chartOptions.value,
+      xaxis: {
+        ...chartOptions.value.xaxis,
+        categories: props.data.chartCategories,
+      },
     },
-  },
-}))
+  }
+})
 </script>
 
 <template>
   <div class="bg-white/4 p-5 rounded-[1.25rem] space-y-2.5 transition-all duration-300 ease-in-out">
-    <div class="flex items-start justify-between">
-      <div class="flex items-center gap-3">
-        <img :src="data.logo" :alt="data.name" class="w-12 h-12" />
-        <div class="font-medium">
-          <h3 class="text-lg">{{ data.name }}</h3>
-          <div class="flex items-center gap-2.5">
-            <p
-              :class="data.priceChangeColor || '#22C55E'"
-              :style="{ color: data.priceChangeColor || '#22C55E' }"
-            >
-              {{ data.priceChange }}
-            </p>
-            <button class="border border-white/40 py-1.25 px-2.75 rounded-[2.5rem]">
-              <Icons name="checks" :size="12" />
-            </button>
+    <div @click="isChartVisible = !isChartVisible" class="space-y-2.5">
+      <div class="flex items-start justify-between">
+        <div class="flex items-center gap-3">
+          <img :src="data.logo" :alt="data.name" class="w-12 h-12" />
+          <div class="font-medium">
+            <h3 class="text-lg">{{ data.name }}</h3>
+            <div class="flex items-center gap-2.5">
+              <p
+                :class="data.priceChangeColor || '#22C55E'"
+                :style="{ color: data.priceChangeColor || '#22C55E' }"
+              >
+                {{ data.priceChange }}
+              </p>
+              <button class="border border-white/40 py-1.25 px-2.75 rounded-[2.5rem]">
+                <Icons name="checks" :size="12" />
+              </button>
+            </div>
           </div>
         </div>
+        <button class="flex items-center gap-2.5">
+          <p class="text-lg font-medium">{{ data.percentage }}</p>
+          <div
+            class="bg-white/8 w-5 h-5 flex items-center justify-center rounded-full transition-transform"
+            :class="{ 'rotate-180': isChartVisible }"
+          >
+            <Icons name="arrow-down-lil" :size="7" />
+          </div>
+        </button>
       </div>
-      <button class="flex items-center gap-2.5" @click="isChartVisible = !isChartVisible">
-        <p class="text-lg font-medium">{{ data.percentage }}</p>
-        <div
-          class="bg-white/8 w-5 h-5 flex items-center justify-center rounded-full transition-transform"
-          :class="{ 'rotate-180': isChartVisible }"
-        >
-          <Icons name="arrow-down-lil" :size="7" />
+      <div class="bg-white/4 rounded-xl py-3 px-4 flex justify-between">
+        <div v-for="(position, index) in data.entryPositions" :key="index" class="w-1/2">
+          <div class="flex items-center gap-2">
+            <div class="w-1.5 h-1.5 rounded-full" :style="{ backgroundColor: position.color }" />
+            <p class="text-xs font-medium" :style="{ color: position.color }">
+              {{ position.label }}
+            </p>
+          </div>
+          <p class="text-lg font-medium">{{ position.price }}</p>
+          <p class="text-[#9CA3AF] text-xs">{{ position.amount }}</p>
         </div>
-      </button>
-    </div>
-    <div class="bg-white/4 rounded-xl py-3 px-4 flex justify-between">
-      <div v-for="(position, index) in data.entryPositions" :key="index" class="w-1/2">
-        <div class="flex items-center gap-2">
-          <div class="w-1.5 h-1.5 rounded-full" :style="{ backgroundColor: position.color }" />
-          <p class="text-xs font-medium" :style="{ color: position.color }">
-            {{ position.label }}
-          </p>
-        </div>
-        <p class="text-lg font-medium">{{ position.price }}</p>
-        <p class="text-[#9CA3AF] text-xs">{{ position.amount }}</p>
       </div>
     </div>
-
     <Transition name="slide-fade">
       <div v-if="isChartVisible" class="flex items-center justify-between">
         <div class="flex items-center gap-2 bg-white/4 rounded-[0.9375rem] p-1.25">

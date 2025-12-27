@@ -3,6 +3,9 @@ import Dialog from '@/components/shared/Dialog.vue'
 import Icons from '@/components/shared/Icons.vue'
 import Info from '@/components/shared/Info.vue'
 import { ref, computed } from 'vue'
+import ghoImage from '@/assets/images/gho.png'
+import smartImage from '@/assets/images/smart.png'
+import powerImage from '@/assets/images/power.png'
 
 interface Props {
   open: boolean
@@ -40,13 +43,13 @@ const amount = ref('')
 const productImage = computed(() => {
   const titleLower = props.title.toLowerCase()
   if (titleLower === 'stability') {
-    return '/src/assets/images/gho.png'
+    return ghoImage
   } else if (titleLower === 'smart') {
-    return '/src/assets/images/smart.png'
+    return smartImage
   } else if (titleLower === 'power') {
-    return '/src/assets/images/power.png'
+    return powerImage
   }
-  return '/src/assets/images/gho.png'
+  return ghoImage
 })
 
 const titleColor = computed(() => {

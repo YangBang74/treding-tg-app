@@ -4,6 +4,9 @@ import { ref } from 'vue'
 import { Icons } from '@/components/shared'
 import HistoryTable, { type Column } from '@/views/Wallet/ui/HistoryTable.vue'
 import Pagination from '@/components/shared/Pagination.vue'
+import ghoImage from '@/assets/images/gho.png'
+import ethImage from '@/assets/images/eth.png'
+import usdeImage from '@/assets/images/usde.png'
 
 type ReferralTabType = '1' | '2' | '3'
 
@@ -18,23 +21,23 @@ const isCopied = ref(false)
 
 // Данные для таблиц
 const line1Data = [
-  { id: 1, userId: 1, username: 'Ivan Ivanov', avatar: '/src/assets/images/gho.png' },
-  { id: 2, userId: 2, username: 'Test213', avatar: '/src/assets/images/eth.png' },
-  { id: 3, userId: 3, username: 'Losd12', avatar: '/src/assets/images/usde.png' },
-  { id: 4, userId: 4, username: 'Safonov oplati', avatar: '/src/assets/images/gho.png' },
-  { id: 5, userId: 5, username: 'Cherry214', avatar: '/src/assets/images/eth.png' },
-  { id: 6, userId: 6, username: 'Trollololo', avatar: '/src/assets/images/usde.png' },
+  { id: 1, userId: 1, username: 'Ivan Ivanov', avatar: ghoImage },
+  { id: 2, userId: 2, username: 'Test213', avatar: ethImage },
+  { id: 3, userId: 3, username: 'Losd12', avatar: usdeImage },
+  { id: 4, userId: 4, username: 'Safonov oplati', avatar: ghoImage },
+  { id: 5, userId: 5, username: 'Cherry214', avatar: ethImage },
+  { id: 6, userId: 6, username: 'Trollololo', avatar: usdeImage },
 ]
 
 const line2Data = [
-  { id: 1, userId: 7, username: 'User7', avatar: '/src/assets/images/gho.png' },
-  { id: 2, userId: 8, username: 'User8', avatar: '/src/assets/images/eth.png' },
-  { id: 3, userId: 9, username: 'User9', avatar: '/src/assets/images/usde.png' },
+  { id: 1, userId: 7, username: 'User7', avatar: ghoImage },
+  { id: 2, userId: 8, username: 'User8', avatar: ethImage },
+  { id: 3, userId: 9, username: 'User9', avatar: usdeImage },
 ]
 
 const line3Data = [
-  { id: 1, userId: 10, username: 'User10', avatar: '/src/assets/images/gho.png' },
-  { id: 2, userId: 11, username: 'User11', avatar: '/src/assets/images/eth.png' },
+  { id: 1, userId: 10, username: 'User10', avatar: ghoImage },
+  { id: 2, userId: 11, username: 'User11', avatar: ethImage },
 ]
 
 // Конфигурация колонок
