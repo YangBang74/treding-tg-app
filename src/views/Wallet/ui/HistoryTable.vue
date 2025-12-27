@@ -17,6 +17,7 @@ interface Props {
   rowBg?: boolean
   containerBg?: boolean
   status?: 'depositing' | 'withdrawal' | 'referrals'
+  gridTemplateColumns?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -24,6 +25,7 @@ const props = withDefaults(defineProps<Props>(), {
   rowBg: true,
   containerBg: true,
   status: undefined,
+  gridTemplateColumns: undefined,
 })
 
 const gridCols = computed(() => {
@@ -84,6 +86,7 @@ const getCellClass = (column: Column, value: unknown, item: Record<string, unkno
         `grid ${gridCols} gap-4 px-3 py-2 text-xs font-medium text-[#9CA3AF] mb-2`,
         headerBg ? 'bg-white/4' : '',
       ]"
+      :style="props.gridTemplateColumns ? { gridTemplateColumns: props.gridTemplateColumns } : {}"
     >
       <div
         v-for="column in columns"
@@ -110,11 +113,12 @@ const getCellClass = (column: Column, value: unknown, item: Record<string, unkno
         `grid ${gridCols} gap-4 pb-2 items-center border-t border-[#6B7280]/39 mx-px`,
         rowBg ? ' p-4' : ' p-4',
       ]"
+      :style="props.gridTemplateColumns ? { gridTemplateColumns: props.gridTemplateColumns } : {}"
     >
       <div
         v-for="column in columns"
         :key="column.key"
-        class="text-[0.625rem] text-white/70 gap-1 justify-center"
+        class="text-[0.625rem] gap-4 text-white/70 gap-1 justify-center"
         :class="[
           column.align === 'right'
             ? 'text-right'

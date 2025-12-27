@@ -5,6 +5,7 @@ import Icons from '@/components/shared/Icons.vue'
 import Info from '@/components/shared/Info.vue'
 import HistoryTable, { type Column } from './ui/HistoryTable.vue'
 import SuccessDialog from './ui/SuccessDialog.vue'
+import Pagination from '@/components/shared/Pagination.vue'
 
 type TabType = 'deposit' | 'withdraw'
 type HistoryTabType = 'depositing' | 'withdrawal' | 'referrals'
@@ -116,7 +117,7 @@ const handleCloseDialog = () => {
 
 <template>
   <section class="text-white p-4 space-y-4">
-    <div class="bg-white/4 rounded-[1.875rem] py-4 space-y-4">
+    <div class="bg-white/4 rounded-[1.875rem] pt-4 space-y-4">
       <div class="bg-black/20 rounded-[1.25rem] py-2.5 px-4 flex items-center gap-3">
         <div class="bg-[#22C55E]/20 w-10 h-10 flex items-center justify-center p-2.5 rounded-full">
           <Icons name="dollar" class="text-[#22C55E]" />
@@ -271,6 +272,7 @@ const handleCloseDialog = () => {
           :data="referralsData"
           status="referrals"
         />
+        <Pagination :current-page="1" :total-pages="10" :total-items="100" :items-per-page="10" />
       </div>
     </div>
   </section>
