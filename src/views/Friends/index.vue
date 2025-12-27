@@ -65,7 +65,7 @@ const handleCopyAddress = async () => {
 </script>
 
 <template>
-  <section class="text-white p-4 space-y-4 border-t pt-2.5 mt-2.5 block">
+  <section class="text-white p-4 space-y-4">
     <div class="bg-white/4 border border-white/8 p-5.25 space-y-3 rounded-2xl">
       <div class="flex items-center gap-2.5">
         <div

@@ -7,7 +7,7 @@ const navItems = [
   { label: 'Earn', icon: 'earn', name: 'home' },
   { label: 'Wallet', icon: 'wallet', name: 'wallet' },
   { label: 'Terminal', icon: 'trading-up', name: 'trading-up' },
-  { label: 'Event', icon: 'cup', name: 'cup' },
+  { label: 'Event', icon: 'cup', name: 'event' },
   { label: 'Friends', icon: 'users', name: 'users' },
 ]
 </script>

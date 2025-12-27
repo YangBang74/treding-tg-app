@@ -4,6 +4,7 @@ import { ref } from 'vue'
 
 defineProps<{
   text: string
+  size?: number
 }>()
 
 const isTooltipVisible = ref(false)
@@ -17,8 +18,8 @@ const isTooltipVisible = ref(false)
       class="cursor-help"
     >
       <svg
-        width="14"
-        height="14"
+        :width="size ? size : 14"
+        :height="size ? size : 14"
         viewBox="0 0 14 14"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

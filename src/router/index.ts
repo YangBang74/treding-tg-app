@@ -7,9 +7,16 @@ import WalletView from '@/views/Wallet/index.vue'
 import TerminalView from '@/views/Terminal/index.vue'
 import EventView from '@/views/Event/index.vue'
 import FriendsView from '@/views/Friends/index.vue'
+import EventDetailView from '@/views/Event/[id]/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    }
+    return { top: 0, behavior: 'smooth' }
+  },
   routes: [
     {
       path: '/',
@@ -32,8 +39,13 @@ const router = createRouter({
         },
         {
           path: 'event',
-          name: 'cup',
+          name: 'event',
           component: EventView,
+        },
+        {
+          path: 'event/:id',
+          name: 'event-id',
+          component: EventDetailView,
         },
         {
           path: 'friends',
